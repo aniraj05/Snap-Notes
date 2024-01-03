@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "201939672860",
+    "project_id": "snap-notes-e41db",
+    "storage_bucket": "snap-notes-e41db.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:201939672860:android:c25fa91fd8a5828f6424d9",
+        "android_client_info": {
+          "package_name": "com.aniket.snap_notes"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBBHwLieBH8mcpE95BI1840RnBX13RM6yI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
