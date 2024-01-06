@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:snap_notes/verify_email_views.dart';
 import 'package:snap_notes/views/login_view.dart';
 import 'package:snap_notes/views/register_view.dart';
-import 'dart:developer' as devtools show log;
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -18,6 +17,7 @@ void main() {
       routes: {
         '/login':(context) => const LoginView(),
         '/register':(context) => const RegisterView(),
+        '/notes':(context) => const NotesView(),
       },
     ),
   );
@@ -105,8 +105,8 @@ Future<bool> showLogOutDialog(BuildContext context) {
       context: context,
       builder: (context) {
     return AlertDialog(
-      title: const Text('Sign out'),
-      content: const Text('Are you sure want to sign out?'),
+      title: const Text('Log out'),
+      content: const Text('Are you sure want to Log out?'),
       actions: [
         TextButton(onPressed: () {
           Navigator.of(context).pop(false);
