@@ -1,0 +1,115 @@
+[1mdiff --git a/lib/main.dart b/lib/main.dart[m
+[1mindex d567029..4f4cfbb 100644[m
+[1m--- a/lib/main.dart[m
+[1m+++ b/lib/main.dart[m
+[36m@@ -1,8 +1,10 @@[m
+ import 'package:firebase_auth/firebase_auth.dart';[m
+ import 'package:firebase_core/firebase_core.dart';[m
+ import 'package:flutter/material.dart';[m
+[32m+[m[32mimport 'package:snap_notes/verify_email_views.dart';[m
+ import 'package:snap_notes/views/login_view.dart';[m
+ import 'package:snap_notes/views/register_view.dart';[m
+[32m+[m[32mimport 'dart:developer' as devtools show log;[m
+ [m
+ void main() {[m
+   WidgetsFlutterBinding.ensureInitialized();[m
+[36m@@ -21,6 +23,8 @@[m [mvoid main() {[m
+   );[m
+ }[m
+ [m
+[32m+[m[32menum MenuAction { logout }[m
+[32m+[m
+ class HomePage extends StatelessWidget {[m
+   const HomePage({super.key});[m
+ [m
+[36m@@ -38,13 +42,16 @@[m [mclass HomePage extends StatelessWidget {[m
+       builder: (context, snapshot) {[m
+         switch (snapshot.connectionState){[m
+           case ConnectionState.done:[m
+[31m-          // final user = FirebaseAuth.instance.currentUser;[m
+[31m-          // if (user?.emailVerified ?? false) {[m
+[31m-          //   return const Text('Done');[m
+[31m-          // } else {[m
+[31m-          //   return const VerifyEmailView();[m
+[31m-          // }[m
+[32m+[m[32m          final user = FirebaseAuth.instance.currentUser;[m
+[32m+[m[32m          if(user != null) {[m
+[32m+[m[32m            if(user.emailVerified) {[m
+[32m+[m[32m              return const NotesView();[m
+[32m+[m[32m            }else{[m
+[32m+[m[32m              return const VerifyEmailView();[m
+[32m+[m[32m            }[m
+[32m+[m[32m          }else {[m
+             return const LoginView();[m
+[32m+[m[32m          }[m
+           default:[m
+             return const CircularProgressIndicator();[m
+         }[m
+[36m@@ -53,3 +60,66 @@[m [mclass HomePage extends StatelessWidget {[m
+   }[m
+ }[m
+ [m
+[32m+[m[32mclass NotesView extends StatefulWidget {[m
+[32m+[m[32m  const NotesView({super.key});[m
+[32m+[m
+[32m+[m[32m  @override[m
+[32m+[m[32m  State<NotesView> createState() => _NotesViewState();[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32mclass _NotesViewState extends State<NotesView> {[m
+[32m+[m[32m  @override[m
+[32m+[m[32m  Widget build(BuildContext context) {[m
+[32m+[m[32m    return Scaffold([m
+[32m+[m[32m      appBar: AppBar([m
+[32m+[m[32m        title: const Text('Main UI'),[m
+[32m+[m[32m        actions: [[m
+[32m+[m[32m          PopupMenuButton<MenuAction>( onSelected: (value) async {[m
+[32m+[m[32m            switch (value) {[m
+[32m+[m[32m              case MenuAction.logout:[m
+[32m+[m[32m                final shouldLogout = await showLogOutDialog(context);[m
+[32m+[m[32m                if (shouldLogout) {[m
+[32m+[m[32m                  await FirebaseAuth.instance.signOut();[m
+[32m+[m[32m                  Navigator.of(context).pushNamedAndRemoveUntil( '/login', (_) => false);[m
+[32m+[m[32m                }[m
+[32m+[m[32m            }[m
+[32m+[m[32m          },[m
+[32m+[m[32m            itemBuilder: (context) {[m
+[32m+[m[32m            return const[[m
+[32m+[m[32m              PopupMenuItem<MenuAction>([m
+[32m+[m[32m                value: MenuAction.logout,[m
+[32m+[m[32m                child: Text('Log out'),[m
+[32m+[m[32m              ),[m
+[32m+[m[32m            ];[m
+[32m+[m[32m          },[m
+[32m+[m[32m          ),[m
+[32m+[m[32m        ],[m
+[32m+[m[32m      ),[m
+[32m+[m[32m      body: const Text('Hello world'),[m
+[32m+[m[32m    );[m
+[32m+[m[32m  }[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32mFuture<bool> showLogOutDialog(BuildContext context) {[m
+[32m+[m[32m  return showDialog<bool>([m
+[32m+[m[32m      context: context,[m
+[32m+[m[32m      builder: (context) {[m
+[32m+[m[32m    return AlertDialog([m
+[32m+[m[32m      title: const Text('Sign out'),[m
+[32m+[m[32m      content: const Text('Are you sure want to sign out?'),[m
+[32m+[m[32m      actions: [[m
+[32m+[m[32m        TextButton(onPressed: () {[m
+[32m+[m[32m          Navigator.of(context).pop(false);[m
+[32m+[m[32m          },[m
+[32m+[m[32m            child: const Text('Cancel'),[m
+[32m+[m[32m        ),[m
+[32m+[m[32m        TextButton(onPressed: () {[m
+[32m+[m[32m          Navigator.of(context).pop(true);[m
+[32m+[m[32m          },[m
+[32m+[m[32m            child: const Text('Log out'),[m
+[32m+[m[32m        ),[m
+[32m+[m[32m      ],[m
+[32m+[m[32m    );[m
+[32m+[m[32m    },[m
+[32m+[m[32m  ).then((value) => value ?? false);[m
+[32m+[m[32m}[m
+\ No newline at end of file[m
