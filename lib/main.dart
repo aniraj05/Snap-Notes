@@ -36,7 +36,7 @@ class HomePage extends StatelessWidget {
         options: const FirebaseOptions(
           apiKey: 'AIzaSyBBHwLieBH8mcpE95BI1840RnBX13RM6yI',
           appId: '1:201939672860:android:c25fa91fd8a5828f6424d9',
-          messagingSenderId: '',
+          messagingSenderId: '201939672860',
           projectId: 'snap-notes-e41db',
         ),
       ),
