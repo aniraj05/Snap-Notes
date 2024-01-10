@@ -77,13 +77,12 @@ class _LoginViewState extends State<LoginView> {
                     );
                   } else {
                     await showErrorDialog(
-                        context,
-                        'Error: ${e.code}',
+                        context, 'Error: ${e.code}',
                     );
                   }
                 }catch (e) {
-                  await showErrorDialog(context,
-                      e.toString(),
+                  await showErrorDialog(
+                    context, e.toString(),
                   );
                 }
               },
