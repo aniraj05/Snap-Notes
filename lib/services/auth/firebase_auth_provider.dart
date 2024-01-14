@@ -1,9 +1,18 @@
+import 'package:firebase_core/firebase_core.dart';
+import 'package:snap_notes/firebase_options.dart';
 import 'package:snap_notes/services/auth/auth_user.dart';
 import 'package:snap_notes/services/auth/auth_provider.dart';
 import 'package:snap_notes/services/auth/auth_exception.dart';
 import 'package:firebase_auth/firebase_auth.dart' show FirebaseAuth, FirebaseAuthException;
 
-class FirebaseAuthProvider implements AuthProvder{
+class FirebaseAuthProvider implements AuthProvider{
+  @override
+  Future<void> initialize() async {
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
+  }
+
   @override
   Future<AuthUser> createUser({
     required String email,
