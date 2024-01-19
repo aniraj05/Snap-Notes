@@ -74,12 +74,12 @@ class _LoginViewState extends State<LoginView> {
                       verifyEmailRoute, (route) => false,
                     );
                   }
-                } on UserNotFoundException {
+                } on UserNotFoundAuthException {
                   await showErrorDialog(
                     context,
                     'User not found',
                   );
-                } on WrongPasswordException {
+                } on WrongPasswordAuthException {
                   await showErrorDialog(
                     context, 'wrong credentials',
                   );

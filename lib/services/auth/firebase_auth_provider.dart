@@ -31,11 +31,11 @@ class FirebaseAuthProvider implements AuthProvider{
       }
     } on FirebaseAuthException catch(e) {
       if(e.code == 'weak-password') {
-        throw WeakPasswordException();
+        throw WeakPasswordAuthException();
       } else if (e.code == 'email-already-in-use') {
-        throw EmailAlreadyInUseException();
+        throw EmailAlreadyInUseAuthException();
       } else if(e.code == 'invalid-email') {
-        throw InvalidEmailException();
+        throw InvalidEmailAuthException();
       }else {
         throw GenericAuthException();
       }
@@ -75,7 +75,7 @@ class FirebaseAuthProvider implements AuthProvider{
       if (e.code == 'user-not-found') {
         throw UserNotLoggedInAuthException();
       }else if(e.code == 'wrong-password') {
-        throw WeakPasswordException();
+        throw WeakPasswordAuthException();
       } else {
         throw GenericAuthException();
       }
