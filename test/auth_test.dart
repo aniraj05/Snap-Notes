@@ -37,7 +37,7 @@ void main() {
 
     test('Create user should delegate to logIn function', () async {
       final badEmailUser = provider.createUser(
-        email: 'ani@ket.com',
+        email: 'foo@bar.com',
         password: 'anypassword',
       );
 
@@ -45,15 +45,15 @@ void main() {
           throwsA(const TypeMatcher<UserNotFoundAuthException>()));
 
       final badPasswordUser = provider.createUser(
-        email: 'someone@ket.com',
-        password: 'aniket',
+        email: 'someone@bar.com',
+        password: 'foobar',
       );
       expect(badPasswordUser,
           throwsA(const TypeMatcher<WrongPasswordAuthException>()));
 
       final user = await provider.createUser(
-        email: 'ani',
-        password: 'ket',
+        email: 'foo',
+        password: 'bar',
       );
       expect(provider.currentUser, user);
       expect(user.isEmailVerified, false);
@@ -113,11 +113,12 @@ class MockAuthProvider implements AuthProvider {
     required String password,
   }) {
     if (!isInitialized) throw NotInitializedException();
-    if (email == 'ani@ket.com') throw UserNotFoundAuthException();
-    if (password == 'aniket') throw WrongPasswordAuthException();
+    if (email == 'foo@bar.com') throw UserNotFoundAuthException();
+    if (password == 'foobar') throw WrongPasswordAuthException();
     const user = AuthUser(
-        isEmailVerified: false,
-        email: 'ani@ket.com',
+      id: 'my_id',
+      isEmailVerified: false,
+      email: 'foo@bar.com',
     );
     _user = user;
     return Future.value(user);
@@ -137,8 +138,9 @@ class MockAuthProvider implements AuthProvider {
     final user = _user;
     if (user == null) throw UserNotFoundAuthException();
     const newUser = AuthUser(
-        isEmailVerified: true,
-        email: 'ani@ket.com',
+      id: 'my_id',
+      isEmailVerified: true,
+      email: 'foo@bar.com',
     );
     _user = newUser;
   }
