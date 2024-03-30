@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:snap_notes/constants/routes.dart';
-import 'package:snap_notes/services/auth/auth_exception.dart';
+import 'package:snap_notes/services/auth/auth_exceptions.dart';
 import 'package:snap_notes/services/auth/auth_service.dart';
 import 'package:snap_notes/utilities/dialogs/error_dialog.dart';
 

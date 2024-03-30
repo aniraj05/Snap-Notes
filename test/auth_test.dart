@@ -1,4 +1,4 @@
-import 'package:snap_notes/services/auth/auth_exception.dart';
+import 'package:snap_notes/services/auth/auth_exceptions.dart';
 import 'package:snap_notes/services/auth/auth_provider.dart';
 import 'package:snap_notes/services/auth/auth_user.dart';
 import 'package:test/test.dart';
